@@ -49,7 +49,7 @@ function make_gauge(tag, { limit = 0, interval = 10000, width = 30, user_text = 
   };
 }
 
-function make_spinner(tag, { user_text = (g) => "" } = {}) {
+function make_spinner(tag, { interval = 10000, user_text = (g) => "" } = {}) {
   let log = console.draft(c.red(tag), c.blue("[" + spinner_state[0] + "]") + " starting...");
   return {
     tag             : tag,
@@ -57,7 +57,7 @@ function make_spinner(tag, { user_text = (g) => "" } = {}) {
     t0              : process.hrtime(),
     bt0             : process.hrtime(),
     N               : 0,
-    update_interval : real_interval,
+    update_interval : interval,
     u_text          : user_text,
     status_text     : function (rate, b_rate) {
       return sprintf("%15d complete (%d items/sec [total], %d items/sec [current interval]%s)",

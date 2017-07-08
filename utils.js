@@ -4,6 +4,7 @@
 const draft   = require('draftlog').into(console);
 const c       = require('chalk');
 const sprintf = require('sprintf-js').sprintf;
+const docopt  = require('docopt');
 
 const spinner_state = [ "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" ];
 
@@ -110,3 +111,4 @@ exports.sprintf      = sprintf;
 exports.make_gauge   = make_gauge;
 exports.make_spinner = make_spinner;
 exports.sleep        = sleep;
+exports.docopt       = docopt;

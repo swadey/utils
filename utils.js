@@ -20,8 +20,8 @@ function elapsed(t0) {
 }
 
 function format_tag(s, { color = c.red, pad = 15 } = {}) {
-  //return sprintf(`%s`, color(s) + " ".repeat(Math.max(0, pad - s.length)));
-  return sprintf(`%-${pad}s`, color(s));
+  return sprintf(`%s`, color(s) + " ".repeat(Math.max(0, pad - s.length)));
+  //return sprintf(`%-${pad}s`, color(s));
 }
 
 function make_gauge(tag, { limit = 0, interval = 10000, width = 30, user_text = () => "" } = {}) {

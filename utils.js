@@ -10,7 +10,8 @@ const sprintf = require('sprintf').sprintf;
 // ------------------------------------------------------------------------------------------------------------------
 function make_gauge(tag, { limit = 0, interval = 10000, width = 30, user_text = (g) => "" } = {}) {
   function paint_bar(N, width) {
-    return c.dim('[') + c.blue('=').repeat(N) + ' '.repeat(width - N) + c.dim('] ');
+    if (width == 0) return c.dim('[') + c.blue("-") + c.dim('] ');
+    else return c.dim('[') + c.blue('=').repeat(N) + ' '.repeat(width - N) + c.dim('] ');
   }
   function elapsed(t0) {
     let dt = process.hrtime();

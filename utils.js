@@ -30,7 +30,7 @@ function make_gauge(tag, { limit = 0, interval = 10000, width = 30, user_text = 
 
   let real_width = Math.min(width, limit);
   let real_interval = Math.min(interval, Math.ceil(limit / 10));
-  let log = console.draft(format_tag(tag) + paint_bar(0, real_width) + "starting...");
+  let log = console.draft(format_tag(tag) + " " + paint_bar(0, real_width) + "starting...");
   return {
     tag             : tag,
     log             : log,
@@ -69,7 +69,7 @@ function make_spinner(tag, { interval = 10000, user_text = () => "" } = {}) {
   function spin(i) {
     return c.dim("[") + c.blue(spinner_state[0]) + c.dim("]");
   }
-  let log = console.draft(format_tag(tag) + spin(0) + " starting...");
+  let log = console.draft(format_tag(tag) + " " + spin(0) + " starting...");
   return {
     tag             : tag,
     log             : log,
@@ -92,7 +92,7 @@ function make_spinner(tag, { interval = 10000, user_text = () => "" } = {}) {
         let elapsed_time = elapsed(this.t0);
         let batch_time   = elapsed(this.bt0);
         let fill         = Math.min(Math.round((this.N / this.limit) * this.width), this.limit);
-        this.log(format_tag(this.tag) + c.dim(" [") + c.blue(spinner_state[(this.N / this.update_interval) % spinner_state.length]) + c.dim("]") +
+        this.log(format_tag(this.tag) + " " + spin((this.N / this.update_interval) % spinner_state.length) +
                  this.status_text(this.N / elapsed_time, this.update_interval / batch_time));
         this.bt0 = process.hrtime();
       }

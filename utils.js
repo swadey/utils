@@ -44,6 +44,7 @@ function make_gauge(tag, { limit = 0, interval = 10000, width = 30, user_text = 
         let batch_time   = elapsed(this.bt0);
         let fill         = Math.min(Math.round((this.N / this.limit) * this.width), this.limit);
         this.log(c.red(this.tag) + " " + paint_bar(fill, this.width) + this.status_text(this.N / elapsed_time, this.update_interval / batch_time));
+        this.bt0 = process.hrtime();
       }
     }
   };
@@ -71,6 +72,7 @@ function make_spinner(tag, { interval = 10000, user_text = (g) => "" } = {}) {
         let fill         = Math.min(Math.round((this.N / this.limit) * this.width), this.limit);
         this.log(c.red(this.tag) + c.blue(" [" + spinner_state[(this.N / this.update_interval) % spinner_state.length] + "]") +
                  this.status_text(this.N / elapsed_time, this.update_interval / batch_time));
+        this.bt0 = process.hrtime();
       }
     }
   };

@@ -15,7 +15,9 @@ function elapsed(t0) {
   return (dt[0] - t0[0]) + (dt[1] - t0[1]) / 1e9;
 }
 
-function format_tag(s, { color : c.red, pad : 15 })
+function format_tag(s, { color : c.red, pad : 15 } = {}) {
+  return sprintf(`%${pad}d`, color(s));
+}
 
 function make_gauge(tag, { limit = 0, interval = 10000, width = 30, user_text = (g) => "" } = {}) {
   function paint_bar(N, width) {

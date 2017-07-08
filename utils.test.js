@@ -9,6 +9,9 @@ test("basic gauges", async () => {
     gauge.pulse();
     expect(gauge.N).toBe(i + 1);
   }
+  gauge.pulse(); // should not throw
+  expect(gauge.N).toBe(11);
+  
 
   let spinner = utils.make_spinner("[test]", { interval : 1 });
   for (let i = 0; i < 10; i++) {

@@ -79,6 +79,7 @@ function make_counter(tag, { interval = 10000, user_text = () => "" } = {}) {
     t0              : process.hrtime(),
     bt0             : process.hrtime(),
     N               : 0,
+    state           : 0,
     update_interval : interval,
     u_text          : user_text,
     status_text     : function (rate, b_rate) {
@@ -91,6 +92,7 @@ function make_counter(tag, { interval = 10000, user_text = () => "" } = {}) {
     },
     pulse           : function() {
       this.N += 1;
+      this.state = (this.state + 1) % spinner_state.length;
       if (this.N % this.update_interval == 0) {
         let elapsed_time = elapsed(this.t0);
         let batch_time   = elapsed(this.bt0);

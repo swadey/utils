@@ -147,21 +147,33 @@ function make_spinner(tag, text, { interval = 10000, theme = default_theme } = {
 }
 
 function read_stream(fn) {
-  if (fn.match(/^.*\.xz$/))
+  if (fn.match(/^.*\.xz$/)) {
+    console.log(`reading xz file: ${fn}`);
     return fs.createReadStream(fn).pipe(new xz.Decompressor());
-  else if (fn.match(/^.*\.gz$/))
+  }
+  else if (fn.match(/^.*\.gz$/)) {
+    console.log(`reading gz file: ${fn}`);
     return fs.createReadStream(fn).pipe(z.createGunzip());
-  else
+  }
+  else {
+    console.log(`reading file: ${fn}`);
     return fs.createReadStream(fn);
+  }
 }
 
 function write_stream(fn) {
-  if (fn.match(/^.*\.xz$/))
+  if (fn.match(/^.*\.xz$/)) {
+    console.log(`writing xz file: ${fn}`);
     return new xz.Compressor().pipe(fs.createWriteStream(fn));
-  else if (fn.match(/^.*\.gz$/))
+  }
+  else if (fn.match(/^.*\.gz$/)) {
+    console.log(`writing gz file: ${fn}`);
     return z.createGzip().pipe(fs.createWriteStream(fn));
-  else
+  }
+  else {
+    console.log(`writing file: ${fn}`);
     return fs.createWriteStream(fn);
+  }
 }
 // ------------------------------------------------------------------------------------------------------------------
 // Exports

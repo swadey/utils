@@ -155,13 +155,13 @@ function read_stream(fn) {
     return fs.createReadStream(fn);
 }
 
-function write_stream(fn) {
+function write_stream(fn, { level = 6 } = {}) {
   if (fn.match(/^.*\.xz$/)) {
-    let ret = new xz.Compressor();
+    let ret = new xz.Compressor(level);
     ret.pipe(fs.createWriteStream(fn));
     return ret;
   } else if (fn.match(/^.*\.gz$/)) {
-    let ret = z.createGzip();
+    let ret = z.createGzip({ level : level });
     ret.pipe(fs.createWriteStream(fn));
     return ret;
   }

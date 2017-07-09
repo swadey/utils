@@ -25,7 +25,7 @@ function format_tag(s, { color = c.red, pad = 15 } = {}) {
 }
 
 function make_gauge(tag, { limit = 0, interval = 10000, width = 30, user_text = () => "" } = {}) {
-  function paint_bar(N, width, { color = c.blue } = {}) {
+  function paint_bar(N, width, { color = c.yellow } = {}) {
     return c.dim('[') + color('=').repeat(N) + ' '.repeat(width - N) + c.dim('] ');
   }
 
@@ -69,7 +69,7 @@ function make_gauge(tag, { limit = 0, interval = 10000, width = 30, user_text = 
 }
 
 function spin(i) {
-  return c.dim("[") + c.blue(spinner_state[i]) + c.dim("]");
+  return c.dim("[") + c.yellow(spinner_state[i]) + c.dim("]");
 }
 
 function make_counter(tag, { interval = 10000, user_text = () => "" } = {}) {

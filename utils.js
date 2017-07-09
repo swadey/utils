@@ -137,4 +137,4 @@ exports.make_gauge   = make_gauge;
 exports.make_counter = make_counter;
 exports.make_spinner = make_spinner;
 exports.sleep        = sleep;
-exports.docopt       = docopt;
+exports.docopt       = docopt.docopt;

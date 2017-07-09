@@ -1,5 +1,20 @@
 const utils = require('./utils.js');
 
+test("docopt", () => {
+  let doc = `
+Usage:
+  test.js [options] <input> <output>
+
+Options:
+  -t <threshold>, --threshold=<threshold>  throw away values below this [default: 10].
+`;
+
+  expect(utils.docopt(doc, { argv: ["in", "out"] })).toMatchObject({ "--threshold": "10", "<input>": "in", "<output>": "out" });
+  expect(utils.docopt(doc, { argv: ["--threshold=100", "in", "out"] })).toMatchObject({ "--threshold": "100", "<input>": "in", "<output>": "out" });
+  expect(utils.docopt(doc, { argv: ["--threshold", "100", "in", "out"] })).toMatchObject({ "--threshold": "100", "<input>": "in", "<output>": "out" });
+  expect(utils.docopt(doc, { argv: ["-t", "100", "in", "out"] })).toMatchObject({ "--threshold": "100", "<input>": "in", "<output>": "out" });
+});
+
 test("basic gauges", async () => {
   let gauge = utils.make_gauge("[test]", { limit : 10 });
   expect(gauge.update_interval).toBe(1);
@@ -26,3 +41,4 @@ test("basic gauges", async () => {
   spinner.complete();
   await utils.sleep(300);
 });
+

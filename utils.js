@@ -82,7 +82,7 @@ function make_counter(tag, { interval = 10000, user_text = () => "" } = {}) {
     update_interval : interval,
     u_text          : user_text,
     status_text     : function (rate, b_rate) {
-      return sprintf("%12d " + c.green("[complete]") + " (%d items/sec [total], %d items/sec [current interval]%s)",
+      return sprintf("%12d complete (%d items/sec [total], %d items/sec [current interval]%s)",
                      this.N, rate, b_rate, this.u_text());
     },
     final_status    : function(elapsed_time, rate) {

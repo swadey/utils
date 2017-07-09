@@ -92,11 +92,11 @@ function make_counter(tag, { interval = 10000, user_text = () => "" } = {}) {
     },
     pulse           : function() {
       this.N += 1;
-      this.state = (this.state + 1) % spinner_state.length;
       if (this.N % this.update_interval == 0) {
         let elapsed_time = elapsed(this.t0);
         let batch_time   = elapsed(this.bt0);
         let fill         = Math.min(Math.round((this.N / this.limit) * this.width), this.limit);
+        this.state = (this.state + 1) % spinner_state.length;
         this.log(format_tag(this.tag) + " " + spin((this.N / this.update_interval) % spinner_state.length) +
                  this.status_text(this.N / elapsed_time, this.update_interval / batch_time));
         this.bt0 = process.hrtime();

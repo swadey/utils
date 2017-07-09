@@ -12,7 +12,9 @@
     "chalk": "^2.0.1",
     "docopt": "^0.6.2",
     "draftlog": "^1.0.12",
-    "sprintf-js": "^1.1.1"
+    "sprintf-js": "^1.1.1",
+    "xz": "^1.2.2",
+    "zlib": "^1.0.5"
   },
   "devDependencies": {
     "jest": "^20.0.4"

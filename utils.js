@@ -147,18 +147,18 @@ function make_spinner(tag, text, { interval = 10000, theme = default_theme } = {
 }
 
 function read_stream(fn) {
-  if (fn.match(/.xz$/))
+  if (fn.match(/\.xz$/))
     return fs.createReadStream(fn).pipe(new xz.Decompressor());
-  else if (fn.match(/.gz$/))
+  else if (fn.match(/\.gz$/))
     return fs.createReadStream(fn).pipe(z.createGunzip());
   else
     return fs.createReadStream(fn);
 }
 
 function write_stream(fn) {
-  if (fn.match(/.xz$/))
+  if (fn.match(/\.xz$/))
     return new xz.Compressor().pipe(fs.createWriteStream(fn));
-  else if (fn.match(/.gz$/))
+  else if (fn.match(/\.gz$/))
     return z.createGzip().pipe(fs.createWriteStream(fn));
   else
     return fs.createWriteStream(fn);

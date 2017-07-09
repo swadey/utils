@@ -32,7 +32,8 @@ test("basic gauges", async () => {
   let counter = utils.make_counter("[test]", { interval : 1 });
   for (let i = 0; i < 10; i++) {
     counter.pulse();
-    await utils.sleep(100);
+    expect(counter.state).toBe((i + 1) % 10);
+    await utils.sleep(200);
   }
   counter.complete();
 

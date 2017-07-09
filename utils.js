@@ -68,10 +68,11 @@ function make_gauge(tag, { limit = 0, interval = 10000, width = 30, user_text = 
   };
 }
 
+function spin(i) {
+  return c.dim("[") + c.blue(spinner_state[i]) + c.dim("]");
+}
+
 function make_counter(tag, { interval = 10000, user_text = () => "" } = {}) {
-  function spin(i) {
-    return c.dim("[") + c.blue(spinner_state[0]) + c.dim("]");
-  }
   let log = console.draft(format_tag(tag) + " " + spin(0) + " starting...");
   return {
     tag             : tag,
@@ -111,9 +112,6 @@ function make_counter(tag, { interval = 10000, user_text = () => "" } = {}) {
 
 function make_spinner(tag, text, { interval = 10000 } = {}) {
   var state = 0;
-  function spin(i) {
-    return c.dim("[") + c.blue(spinner_state[0]) + c.dim("]");
-  }
   let log = console.draft(format_tag(tag) + " " + spin(state) + " " + text);
   let id  = setInterval(() => {
     log(format_tag(tag) + " " + spin(state) + " " + text + ` ${state}`);

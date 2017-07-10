@@ -22,6 +22,10 @@ const default_theme = {
 // ------------------------------------------------------------------------------------------------------------------
 // Utilities
 // ------------------------------------------------------------------------------------------------------------------
+function secs_to_hms(s) {
+  return dateformat(new Date(s * 1000), 'UTC:HH:MM:ss');
+}
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -58,8 +62,8 @@ function make_gauge(tag, { limit = 0, interval = 10000, width = 30, theme = defa
                      this.N, rate, b_rate, theme.user_color(this.u_text()));
     },
     final_status    : function(elapsed_time, rate) {
-      return sprintf("%12d " + theme.complete_color("[complete]") + " (" + theme.time_color("total time: %d [secs], %d items/sec [total]") + "%s" + ")",
-                     this.N, elapsed_time, rate, theme.user_color(this.u_text()));
+      return sprintf("%12d " + theme.complete_color("[complete]") + " (" + theme.time_color("total time: %s, %d items/sec [total]") + "%s" + ")",
+                     this.N, secs_to_hms(elapsed_time), rate, theme.user_color(this.u_text()));
     },
     pulse           : function() {
       this.N += 1;
@@ -101,8 +105,8 @@ function make_counter(tag, { interval = 10000, theme = default_theme, user_text 
                      this.N, rate, b_rate, theme.user_color(this.u_text()));
     },
     final_status    : function(elapsed_time, rate) {
-      return sprintf("%12d " + theme.complete_color("[complete]") + " (" + theme.time_color("total time: %d secs, %d items/sec") + "%s" + ")",
-                     this.N, elapsed_time, rate, theme.user_color(this.u_text()));
+      return sprintf("%12d " + theme.complete_color("[complete]") + " (" + theme.time_color("total time: %s, %d items/sec") + "%s" + ")",
+                     this.N, secs_to_hms(elapsed_time), rate, theme.user_color(this.u_text()));
     },
     pulse           : function() {
       this.N += 1;
@@ -142,7 +146,7 @@ function make_spinner(tag, text, { interval = 10000, theme = default_theme } = {
       clearInterval(id);
       this.log(format_tag(this.tag, theme.tag_color) +
                " [" + theme.complete_color("✔") + "] " +
-               text + theme.complete_color(" [complete]") + " (" + theme.time_color(`${elapsed(this.t0)} seconds`) + ")");
+               text + theme.complete_color(" [complete]") + " (" + theme.time_color(`total time: ${secs_to_hms(elapsed(this.t0))}`) + ")");
     }
   };
 }
@@ -180,4 +184,4 @@ exports.sleep        = sleep;
 exports.docopt       = docopt.docopt;
 exports.read_stream  = read_stream;
 exports.write_stream = write_stream;
-exports.secs_to_hms  = (s) => dateformat(new Date(null).setSeconds(s), 'UTC:HH:MM:ss');
+exports.secs_to_hms  = secs_to_hms;

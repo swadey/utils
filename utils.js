@@ -1,13 +1,14 @@
 // ------------------------------------------------------------------------------------------------------------------
 // Imports
 // ------------------------------------------------------------------------------------------------------------------
-const draft   = require('draftlog').into(console);
-const c       = require('chalk');
-const sprintf = require('sprintf-js').sprintf;
-const docopt  = require('docopt');
-const z       = require('zlib');
-const xz      = require('xz');
-const fs      = require('fs');
+const draft      = require('draftlog').into(console);
+const c          = require('chalk');
+const sprintf    = require('sprintf-js').sprintf;
+const docopt     = require('docopt');
+const z          = require('zlib');
+const xz         = require('xz');
+const fs         = require('fs');
+const dateformat = require('dateformat');
 
 const spinner_state = [ "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" ];
 const default_theme = {
@@ -179,3 +180,4 @@ exports.sleep        = sleep;
 exports.docopt       = docopt.docopt;
 exports.read_stream  = read_stream;
 exports.write_stream = write_stream;
+exports.secs_to_hms  = (s) => dateformat(new Date(null).setSeconds(s), 'UTC:HH:MM:ss');

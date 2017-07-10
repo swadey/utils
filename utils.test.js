@@ -43,3 +43,8 @@ test("basic gauges", async () => {
   await utils.sleep(300);
 });
 
+test("other utilities", () => {
+  expect(utils.secs_to_hms(100)).toBe("00:01:40");
+  expect(utils.secs_to_hms(1000)).toBe("00:16:40");
+  expect(utils.secs_to_hms(10000)).toBe("02:46:40");
+});

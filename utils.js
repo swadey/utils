@@ -6,7 +6,7 @@ const c          = require('chalk');
 const sprintf    = require('sprintf-js').sprintf;
 const docopt     = require('docopt');
 const z          = require('zlib');
-const xz         = require('xz');
+const xz         = require('lzma-native');
 const fs         = require('fs');
 const dateformat = require('dateformat');
 

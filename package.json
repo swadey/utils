@@ -13,8 +13,8 @@
     "dateformat": "^2.0.0",
     "docopt": "^0.6.2",
     "draftlog": "^1.0.12",
+    "lzma-native": "^4.0.5",
     "sprintf-js": "^1.1.1",
-    "xz": "^1.2.2",
     "zlib": "^1.0.5"
   },
   "devDependencies": {
